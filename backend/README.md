@@ -25,7 +25,7 @@ Then:
 - Start your Mongo image or DB and fill out the secrets for your database in your own secrets file following the model.
 - Then start the server
 
-`node server.js`
+`node server`
 
 ## Usage
 
