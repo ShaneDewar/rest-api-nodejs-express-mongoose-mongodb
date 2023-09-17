@@ -12,6 +12,12 @@ This was designed to work with the Vue front end package [link]. This is half of
 
 ## Installation
 
+Change to the "backend" folder:
+
+`cd backend`
+
+Then:
+
 `npm install`
 
 ### Start Server
