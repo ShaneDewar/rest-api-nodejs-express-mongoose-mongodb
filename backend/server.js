@@ -1,6 +1,14 @@
 const express = require("express");
 const server = express();
 const cors = require("cors");
+const { rateLimit } = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    standardHeaders: false, // disable rate-limit headers
+    legacyHeaders: false, // disable legacy headers
+  });
 
 const port = 3033;
 
@@ -9,6 +17,8 @@ var cors_options = {
 };
 
 server.use(cors(cors_options));
+
+server.use(limiter);
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); //x-www-form-urlencoded coverage.
 
