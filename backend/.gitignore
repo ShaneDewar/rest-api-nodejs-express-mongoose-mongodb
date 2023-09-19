@@ -29,3 +29,4 @@ coverage
 
 .secrets
 .secrets.json
+.logs

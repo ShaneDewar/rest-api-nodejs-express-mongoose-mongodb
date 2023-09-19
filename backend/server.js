@@ -27,15 +27,15 @@ const db = require("./models/database.js");
 db.mongoose
   .connect(db.url, {})
   .then(() => {
-    logger.log("Connected to the database.");
+    logger.info("Connected to the database.");
   })
   .catch((err) => {
-    logger.log("Cannot connect to the database.", err);
+    logger.error("Cannot connect to the database.", err);
     process.exit();
   });
 
 require("./routes/media.routes.js")(server);
 
 server.listen(port, () => {
-  logger.log(`Server started on port ${port}`);
+  logger.info(`Server started on port ${port}`);
 });
