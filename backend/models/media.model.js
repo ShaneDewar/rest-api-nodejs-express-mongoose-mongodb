@@ -16,6 +16,13 @@ module.exports = (mongoose) => {
       size: String,
       notes: [String],
     },
+    {
+      capped: {
+        size: 4 * 1024 * 1024 * 1024, // 4GB
+        max: 100000,
+      },
+      compression: { compressor: "snappy" },
+    },
     { timestamps: true },
   );
 
