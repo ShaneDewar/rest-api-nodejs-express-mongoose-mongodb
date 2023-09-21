@@ -1,6 +1,7 @@
 const { request } = require("express");
 const db = require("../models/database.js");
 const Media = db.media;
+const { logger } = require("./logging/logger.js");
 
 exports.create = (req, res) => {
   if (!req.body.title) {
@@ -70,7 +71,7 @@ exports.findAll = (req, res) => {
     ? { title: { $regex: new RegExp(title), $options: "i" } }
     : {};
 
-  console.log(`finding all ${condition}`);
+  logger.info(`finding all ${condition}`);
   Media.find(condition)
     .then((data) => {
       res.send(data);
@@ -84,13 +85,13 @@ exports.findAll = (req, res) => {
 
 exports.findAllOfFormat = (req, res) => {
   const requestFormat = req.params.format;
-  console.log(`finding all ${requestFormat}`);
+  logger.info(`finding all ${requestFormat}`);
 
   var condition = requestFormat
     ? { format: { $regex: new RegExp(requestFormat), $options: "i" } }
     : {};
 
-  console.log(`finding all ${condition}`);
+  logger.info(`finding all ${condition}`);
   Media.find(condition)
     .then((data) => {
       res.send(data);
@@ -106,7 +107,7 @@ exports.findAllOfFormat = (req, res) => {
 
 exports.search = (req, res) => {
   const searchValue = req.params.search_value;
-  console.log(`searching for ${searchValue}`);
+  logger.info(`searching for ${searchValue}`);
 
   let condition = searchValue
     ? {
@@ -116,12 +117,12 @@ exports.search = (req, res) => {
       }
     : {};
 
-  console.log(condition);
+  // console.log(condition);
 
   Media.find(condition)
     .then((data) => {
       res.send(data);
-      console.log("Result" + data);
+      // console.log("Result" + data);
     })
     .catch((err) => {
       res.status(500).send({
