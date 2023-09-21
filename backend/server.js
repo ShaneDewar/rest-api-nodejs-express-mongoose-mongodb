@@ -1,15 +1,15 @@
 const express = require("express");
 const server = express();
 const cors = require("cors");
-const { rateLimit } = require('express-rate-limit');
-const logger = require("./logging/logger.js");
+const { rateLimit } = require("express-rate-limit");
+const { logger } = require("./logging/logger.js");
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 10, // limit each IP to 100 requests per windowMs
-    standardHeaders: false, // disable rate-limit headers
-    legacyHeaders: false, // disable legacy headers
-  });
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // limit each IP to 100 requests per windowMs
+  standardHeaders: false, // disable rate-limit headers
+  legacyHeaders: false, // disable legacy headers
+});
 
 const port = 3033;
 

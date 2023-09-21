@@ -1,17 +1,44 @@
-const { format, createLogger, transports } = require('winston');
-const { combine, timestamp, label, printf, prettyPrint } = format;
-const CATEGORY = "winson json custom"
+const winston = require("winston");
 
-const logger = createLogger({
-    level: 'info',
-    format: combine(
-        label({ label: CATEGORY }),
-        timestamp({ format: 'YYYY-MM-DD HH:mm:ss', }),
-        prettyPrint(),
-    ),
+function logFormatter(params) {
+  return `${params.timestamp} [${params.level}]: ${params.message}`;
+}
+
+function createLogger() {
+  winston.addColors({
+    error: "red",
+    warn: "yellow",
+    info: "green",
+    debug: "cyan",
+  });
+
+  return winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    defaultMeta: { service: "nodejs-library-api" },
     transports: [
-        new transports.File({ filename: 'logs/error.log', level: 'error' }),
-        new transports.Console()],
-});
+      new winston.transports.Console({
+        // filename: "logs/error.log",
+        format: winston.format.combine(
+          winston.format.colorize(),
+          winston.format.timestamp(),
+          winston.format.splat(),
+          winston.format.printf(logFormatter),
+        ),
+      }),
+      new winston.transport.defaultMaxListeners({
+        filename: "logs/error.log",
+        format: winston.format.combine(
+          winston.format.timestamp(),
+          winston.format.splat(),
+          winston.format.printf(logFormatter),
+        ),
+      }),
+    ],
+  });
+}
 
-module.exports = logger;
+module.exports = {
+  logFormatter,
+  logger: createLogger(),
+};
