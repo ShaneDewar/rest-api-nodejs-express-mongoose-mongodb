@@ -1,4 +1,3 @@
-const { request } = require("express");
 const db = require("../models/database.js");
 const Media = db.media;
 const { logger } = require("../logging/logger.js");
@@ -29,6 +28,9 @@ exports.create = (req, res) => {
     .save(media)
     .then((data) => {
       res.send(data);
+      logger.info(
+        `User: ${req.socket.remoteAddress} created Media ${data.title} - ${data._id}`,
+      );
     })
     .catch((err) => {
       res.status(500).send({
@@ -71,7 +73,7 @@ exports.findAll = (req, res) => {
     ? { title: { $regex: new RegExp(title), $options: "i" } }
     : {};
 
-  logger.info(`finding all ${condition}`);
+  logger.info(`User: ${req.socket.remoteAddress} finding entire collection.`);
   Media.find(condition)
     .then((data) => {
       res.send(data);
@@ -85,13 +87,13 @@ exports.findAll = (req, res) => {
 
 exports.findAllOfFormat = (req, res) => {
   const requestFormat = req.params.format;
-  logger.info(`finding all ${requestFormat}`);
+  logger.info(`User: ${req.socket.remoteAddress} finding all ${requestFormat}`);
 
   var condition = requestFormat
     ? { format: { $regex: new RegExp(requestFormat), $options: "i" } }
     : {};
 
-  logger.info(`finding all ${condition}`);
+  // logger.info(`finding all ${condition}`);
   Media.find(condition)
     .then((data) => {
       res.send(data);
@@ -107,7 +109,7 @@ exports.findAllOfFormat = (req, res) => {
 
 exports.search = (req, res) => {
   const searchValue = req.params.search_value;
-  logger.info(`searching for ${searchValue}`);
+  logger.info(`User: ${req.socket.remoteAddress} searching for ${searchValue}`);
 
   let condition = searchValue
     ? {
