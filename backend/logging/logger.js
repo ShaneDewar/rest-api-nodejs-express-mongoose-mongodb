@@ -18,7 +18,6 @@ function createLogger() {
     defaultMeta: { service: "nodejs-library-api" },
     transports: [
       new winston.transports.Console({
-        // filename: "logs/error.log",
         format: winston.format.combine(
           winston.format.colorize(),
           winston.format.timestamp(),
@@ -26,7 +25,7 @@ function createLogger() {
           winston.format.printf(logFormatter),
         ),
       }),
-      new winston.transport.defaultMaxListeners({
+      new winston.transports.File({
         filename: "logs/error.log",
         format: winston.format.combine(
           winston.format.timestamp(),

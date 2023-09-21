@@ -1,7 +1,7 @@
 const { request } = require("express");
 const db = require("../models/database.js");
 const Media = db.media;
-const { logger } = require("./logging/logger.js");
+const { logger } = require("../logging/logger.js");
 
 exports.create = (req, res) => {
   if (!req.body.title) {
