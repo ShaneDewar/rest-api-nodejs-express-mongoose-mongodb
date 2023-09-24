@@ -1,5 +1,6 @@
 const express = require("express");
 const server = express();
+const helmet = require("helmet");
 const cors = require("cors");
 const { rateLimit } = require("express-rate-limit");
 const { logger } = require("./logging/logger.js");
@@ -20,6 +21,7 @@ var cors_options = {
 server.use(cors(cors_options));
 
 server.use(limiter);
+server.use(helmet());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); //x-www-form-urlencoded coverage.
 
