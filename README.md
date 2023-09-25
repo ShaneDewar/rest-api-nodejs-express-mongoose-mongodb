@@ -14,18 +14,21 @@ This was designed to work with the Vue front end package [link]. This is half of
 
 Change to the "backend" folder:
 
-`cd backend`
+- `cd backend`
 
 Then:
 
-`npm install`
+- `npm install`
 
 ### Start Server
 
-- Start your Mongo image or DB and fill out the secrets for your database in your own secrets file following the model.
-- Then start the server
+Start your Mongo image or DB and fill out the secrets for your database in your own secrets file following the model.
 
-`node server`
+- [Secrets Template link]
+
+Then start the server:
+
+- `node server`
 
 ## Usage
 
