@@ -31,3 +31,5 @@ coverage
 .secrets.json
 .logs
 .old
+.dockerignore
+Dockerfile
