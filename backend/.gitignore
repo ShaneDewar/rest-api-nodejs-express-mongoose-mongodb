@@ -33,3 +33,4 @@ coverage
 .old
 .dockerignore
 Dockerfile
+docker-compose.yaml
