@@ -12,6 +12,8 @@ This was designed to work with the Vue front end package [link]. This is half of
 
 ## Installation
 
+Confirm mongodb is installed. The server will fail to start after installation if mongodb isn't running. It works with Atlas, self hosted and the mongodb docker image.
+
 Change to the "backend" folder:
 
 - `cd backend`
