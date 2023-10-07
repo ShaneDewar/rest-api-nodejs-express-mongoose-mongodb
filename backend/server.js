@@ -26,8 +26,8 @@ server.use(cors(cors_options));
 
 server.use(cors());
 server.use(limiter);
-server.use(helmet());
 server.use(express.json());
+server.use(helmet());
 server.use(express.urlencoded({ extended: true })); //x-www-form-urlencoded coverage.
 
 const db = require("./models/database.js");
