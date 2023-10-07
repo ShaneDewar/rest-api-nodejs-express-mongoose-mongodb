@@ -17,16 +17,14 @@ const port = 3033;
 var cors_options = {
   origin: [
     "http://localhost:5173",
-    "frontend:8080",
-    "frontend:5173",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:5173",
     "http://localhost:3000",
+    // "*liveurl.com",
   ],
 };
 
 server.use(cors(cors_options));
 
+server.use(cors());
 server.use(limiter);
 server.use(helmet());
 server.use(express.json());
