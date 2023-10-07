@@ -25,5 +25,5 @@ module.exports = (routes) => {
   // Delete Media by ID
   router.delete("/media/:id", media.delete);
 
-  routes.use("/", router);
+  routes.use("/api/", router);
 };

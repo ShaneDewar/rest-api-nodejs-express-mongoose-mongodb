@@ -119,8 +119,6 @@ exports.search = (req, res) => {
       }
     : {};
 
-  // console.log(condition);
-
   Media.find(condition)
     .then((data) => {
       res.send(data);
